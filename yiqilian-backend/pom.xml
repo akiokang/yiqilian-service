@@ -12,7 +12,7 @@
     <modules>
         <module>yiqilian-common</module>
         <module>yiqilian-model</module>
-        <module>yiqilian-biz/biz-auth</module>
+        <module>yiqilian-biz</module>
     </modules>
 
     <properties>

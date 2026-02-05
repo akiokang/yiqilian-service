@@ -4,9 +4,9 @@
         <groupId>com.yiqilian</groupId>
         <artifactId>yiqilian-backend</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath> </parent>
-
-    <artifactId>biz-auth</artifactId>
+        <relativePath>../pom.xml</relativePath> <!-- 确保路径正确 -->
+    </parent>
+    <artifactId>yiqilian-biz</artifactId>
 
     <dependencies>
         <dependency>
