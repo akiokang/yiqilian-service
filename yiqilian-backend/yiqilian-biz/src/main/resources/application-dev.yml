@@ -1,5 +1,17 @@
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3307/yiqilian_db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
+
+mybatis-plus:
+  # 必须指向 yiqilian-model 模块中实体类所在的包
+  type-aliases-package: com.yiqilian.entity
+  # 确保扫描到 biz 模块 resources 下的 xml
+  mapper-locations: classpath*:/mapper/**/*.xml
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    # 如果你在 docker 里没设密码，这里不需要填 password
+    # 如果连接失败，可以尝试增加 timeout: 5000ms
