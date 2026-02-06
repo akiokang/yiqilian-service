@@ -2,12 +2,12 @@ package com.yiqilian.service.impl;
 
 import com.yiqilian.common.exception.BusinessException;
 import com.yiqilian.model.dto.LoginDTO;
-import com.yiqilian.service.AuthService;
+import com.yiqilian.service.UserLoginService;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 @Service
-public class AuthServiceImpl implements AuthService {
+public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public Map<String, Object> login(LoginDTO loginDTO) {
         if ("123456".equals(loginDTO.getCode())) {

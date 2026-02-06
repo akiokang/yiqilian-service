@@ -4,6 +4,8 @@
     context-path: /
 
 spring:
+  profiles:
+    active: dev # 默认启动 dev 环境
   application:
     name: yiqilian-biz-auth
   
