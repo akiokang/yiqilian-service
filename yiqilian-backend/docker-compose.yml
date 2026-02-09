@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  # MySQL 数据库容器
+  yiqilian-mysql:
+    image: mysql:8.0.33
+    container_name: yiqilian-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # 设置数据库登录密码
+      MYSQL_DATABASE: yiqilian_db # 启动时自动创建一个叫这个名字的库
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306" # 宿主机端口:容器端口
+    volumes:
+      # 重要：将数据库数据映射到你本地，防止容器删了数据丢失
+      - ./docker/mysql/data:/var/lib/mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  yiqilian-redis:
+    image: redis:7.0
+    container_name: yiqilian-redis
+    restart: always
+    ports:
+      - "6379:6379" # 映射宿主机 6379 端口
+    volumes:
+      - ./docker/redis/data:/data # 数据持久化，防止验证码或缓存丢失
+    command: redis-server --appendonly yes # 开启 AOF 持久化，更安全

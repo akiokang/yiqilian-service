@@ -8,6 +8,7 @@ import com.yiqilian.service.*;
 import com.yiqilian.mapper.YqlTrainingPlanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +110,25 @@ public class YqlTrainingPlanServiceImpl extends ServiceImpl<YqlTrainingPlanMappe
             }
         }
         return vo;
+    }
+
+    @Transactional // 必须开启事务，保证要么全删，要么都不删
+    public boolean deleteFullPlan(Long planId) {
+        // 1. 查出该计划下所有的详情 ID
+        List<YqlPlanDetail> details = yqlPlanDetailService.list(
+                new LambdaQueryWrapper<YqlPlanDetail>().eq(YqlPlanDetail::getPlanId, planId));
+
+        if (!details.isEmpty()) {
+            List<Long> detailIds = details.stream().map(YqlPlanDetail::getId).collect(Collectors.toList());
+            // 2. 级联删除所有的组数记录 (Record)
+            yqlTrainingRecordService.remove(
+                    new LambdaQueryWrapper<YqlTrainingRecord>().in(YqlTrainingRecord::getDetailId, detailIds));
+            // 3. 级联删除所有的部位详情 (Detail)
+            yqlPlanDetailService.removeByIds(detailIds);
+        }
+
+        // 4. 最后删除主计划
+        return this.removeById(planId);
     }
 }
 

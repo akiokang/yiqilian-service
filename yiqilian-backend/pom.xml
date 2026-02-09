@@ -13,6 +13,7 @@
         <module>yiqilian-common</module>
         <module>yiqilian-model</module>
         <module>yiqilian-biz</module>
+        <module>yiqilian-admin</module>
     </modules>
 
     <properties>

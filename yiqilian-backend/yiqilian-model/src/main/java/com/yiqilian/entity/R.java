@@ -1,12 +1,12 @@
 package com.yiqilian.entity;
 
-public class R {
+public class R<T> {
     private String code;
     private String message;
-    private Object data;
+    private T data;
 
     // 构造函数
-    public R(String code, String message, Object data) {
+    public R(String code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -63,7 +63,7 @@ public class R {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }
