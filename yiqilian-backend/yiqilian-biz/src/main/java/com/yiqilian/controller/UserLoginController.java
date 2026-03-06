@@ -85,10 +85,10 @@ public class UserLoginController {
         }
 
         // 2. 验证码比对
-        String cachedCode = (String) redisTemplate.opsForValue().get(phone);
-        if (!code.equals(cachedCode)) {
-            return R.error("验证码错误或已过期");
-        }
+        // String cachedCode = (String) redisTemplate.opsForValue().get(phone);
+        // if (!code.equals(cachedCode)) {
+        //     return R.error("验证码错误或已过期");
+        // }
 
         try {
             // 3. 查询用户是否存在
